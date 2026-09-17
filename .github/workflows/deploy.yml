@@ -24,9 +24,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      # User site (kane841.github.io): leave baseURL at default `/`.
       - run: npm run generate
-        env:
-          NUXT_APP_BASE_URL: /${{ github.event.repository.name }}/
       - run: npx vitest run tests/generate-output.spec.ts
       - uses: actions/upload-pages-artifact@v3
         with:
