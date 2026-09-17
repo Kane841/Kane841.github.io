@@ -58,6 +58,6 @@ export function loadAbout(file: string): AboutMeta {
   const { data } = matter(readFileSync(file, 'utf8'))
   return {
     skills: data.skills,
-    socials: (data.socials ?? []) as SocialLink[],
+    socials: data.socials as SocialLink[] | undefined,
   }
 }

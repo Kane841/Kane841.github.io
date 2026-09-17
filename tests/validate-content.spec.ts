@@ -13,4 +13,10 @@ describe('assertValidContent', () => {
   it('fails when article tags missing or date is not YYYY-MM-DD', () => {
     expect(() => assertValidContent(join(here, 'fixtures/content-invalid'))).toThrow(/bad\.md/)
   })
+
+  it('fails when about.md lacks socials', () => {
+    expect(() => assertValidContent(join(here, 'fixtures/content-about-no-socials'))).toThrow(
+      /Invalid about\.md: skills and socials are required/,
+    )
+  })
 })
