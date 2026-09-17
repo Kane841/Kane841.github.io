@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-background text-foreground font-sans text-base antialiased;
+    line-height: 1.5;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.ring');
+    outline-offset: 2px;
+  }
+
+  a, button {
+    cursor: pointer;
+  }
+}
+
+.aurora-bg {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background-color: theme('colors.background');
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+  content: '';
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: aurora-shift 12s ease-in-out infinite;
+}
+
+.aurora-bg::before {
+  background: theme('colors.primary');
+  top: -10vw;
+  left: -8vw;
+}
+
+.aurora-bg::after {
+  background: theme('colors.accent');
+  right: -10vw;
+  bottom: -12vw;
+  animation-delay: -4s;
+}
+
+@keyframes aurora-shift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(4%, 6%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-bg::before,
+  .aurora-bg::after {
+    animation: none;
+  }
+}
+
+.prose-aurora {
+  @apply text-card-foreground text-lg leading-relaxed;
+}
+
+.prose-aurora a {
+  @apply text-accent underline;
+}
+
+.prose-aurora code,
+.prose-aurora pre {
+  @apply font-mono bg-muted rounded-md;
+}
+
+.prose-aurora pre {
+  @apply p-4 overflow-x-auto;
+}
+
+.prose-aurora code {
+  @apply px-1 py-0.5 text-sm;
+}
