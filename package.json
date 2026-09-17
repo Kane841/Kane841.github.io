@@ -7,6 +7,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "test": "vitest run",
+    "test:all": "vitest run tests --exclude tests/generate-output.spec.ts && nuxt generate && vitest run tests/generate-output.spec.ts",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
