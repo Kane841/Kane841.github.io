@@ -28,6 +28,11 @@ describe('generated output', () => {
     expect(pageExists('articles/this-slug-does-not-exist')).toBe(false)
   })
 
+  it('writes decoded Chinese tag pages instead of percent-encoded directories', () => {
+    expect(pageExists('tags/前端')).toBe(true)
+    expect(existsSync(join(pub, 'tags', '%E5%89%8D%E7%AB%AF', 'index.html'))).toBe(false)
+  })
+
   it('writes rss without drafts and with absolute links', () => {
     const xml = readFileSync(join(pub, 'rss.xml'), 'utf8')
     const published = publishedArticles(loadArticles('content/articles'))

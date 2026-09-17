@@ -1,10 +1,13 @@
-import { readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import matter from 'gray-matter'
 import type { AboutMeta, ArticleMeta, ProjectMeta, SocialLink } from '../types/content'
 import { slugFromPath } from './slug'
 
 function mdFiles(dir: string): string[] {
+  if (!existsSync(dir)) {
+    return []
+  }
   return readdirSync(dir)
     .filter(name => name.endsWith('.md'))
     .map(name => join(dir, name))

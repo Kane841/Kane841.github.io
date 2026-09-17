@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   ssr: true,
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/content'],
+  features: {
+    inlineStyles: false,
+  },
   googleFonts: {
     display: 'swap',
     families: {
@@ -14,7 +17,9 @@ export default defineNuxtConfig({
       'JetBrains Mono': [400, 500],
     },
   },
-  css: ['~/assets/css/main.css'],
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+  },
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
   },
@@ -27,11 +32,17 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/rss.xml'],
+      failOnError: true,
     },
   },
   hooks: {
     'build:before'() {
       assertValidContent(process.cwd())
+    },
+    'prerender:generate'(route) {
+      if (route.fileName?.includes('%')) {
+        try { route.fileName = decodeURIComponent(route.fileName) } catch {}
+      }
     },
   },
 })

@@ -5,6 +5,7 @@ summary: 一篇已发布的示例文章。
 tags:
   - Vue
   - Nuxt
+  - 前端
 draft: false
 ---
 

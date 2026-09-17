@@ -68,6 +68,34 @@
   @apply text-card-foreground text-lg leading-relaxed;
 }
 
+.prose-aurora :where(h1, h2, h3, h4) {
+  @apply font-heading text-foreground font-semibold mt-8 mb-3;
+}
+
+.prose-aurora h1 {
+  @apply text-3xl;
+}
+
+.prose-aurora h2 {
+  @apply text-2xl;
+}
+
+.prose-aurora h3 {
+  @apply text-xl;
+}
+
+.prose-aurora ul {
+  @apply list-disc pl-6 my-4;
+}
+
+.prose-aurora ol {
+  @apply list-decimal pl-6 my-4;
+}
+
+.prose-aurora blockquote {
+  @apply border-l-2 border-border pl-4 my-4 text-muted-foreground;
+}
+
 .prose-aurora a {
   @apply text-accent underline;
 }
