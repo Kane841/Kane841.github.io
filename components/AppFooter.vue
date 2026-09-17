@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { joinURL } from 'ufo'
 import { siteConfig } from '../site.config'
 
+const rssHref = joinURL(useRuntimeConfig().app.baseURL, 'rss.xml')
 const { data: about } = await useAsyncData('footer-socials', () =>
   queryContent('/about').only(['socials']).findOne(),
 )
@@ -10,7 +12,7 @@ const { data: about } = await useAsyncData('footer-socials', () =>
   <footer class="border-t border-border">
     <div class="mx-auto flex max-w-content flex-wrap items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground md:px-8">
       <div class="flex flex-wrap items-center gap-4">
-        <NuxtLink to="/rss.xml" external class="hover:text-foreground">RSS</NuxtLink>
+        <NuxtLink :to="rssHref" external class="hover:text-foreground">RSS</NuxtLink>
         <a
           v-for="social in about?.socials ?? []"
           :key="social.url"
