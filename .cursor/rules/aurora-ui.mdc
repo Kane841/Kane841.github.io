@@ -1,0 +1,28 @@
+---
+description: 个人博客 Aurora UI 外观约定；改页面或样式时必须遵守
+alwaysApply: true
+---
+
+# Aurora UI
+
+完整规格：`docs/superpowers/specs/2026-09-17-personal-blog-ui-design.md`。功能规格：`docs/superpowers/specs/2026-09-17-personal-blog-design.md`。改 UI 不得改路由、frontmatter 或 `content/` 约定。
+
+## 必须
+
+- 深色画布 `#0B1020`，极光主色 `#7C3AED`，辅色 `#22D3EE`。色值只放 CSS 变量 / Tailwind `@theme`，组件内不写死 hex。
+- 极光只做背景、描边、标签氛围；正文和卡片用实心底 `#12182A`，对比度 ≥ 4.5:1。
+- 标题 Outfit，正文 Inter，中文回退 Noto Sans SC，代码 JetBrains Mono。
+- 导航仅：首页、文章、项目、关于我。字标为 `site.config.name` 纯文字。无搜索、无主题切换、无浅色模式。
+- 卡片圆角 16px；动效仅 8–12s 背景缓移 + 150–300ms hover。尊重 `prefers-reduced-motion`。
+- 文章标签链到 `/tags/:tag`；项目标签和技能芯片不可点。无简历文件则不渲染下载入口。
+- 图标用 Lucide SVG，不用 emoji。可点元素 `cursor-pointer`，目标 ≥ 44px。
+
+## 禁止
+
+```vue
+<!-- ❌ 正文直接铺在渐变上 -->
+<p class="bg-linear-to-r from-violet-600 to-cyan-400">长文</p>
+
+<!-- ✅ 实心底上读 -->
+<article class="bg-card text-card-foreground">长文</article>
+```
